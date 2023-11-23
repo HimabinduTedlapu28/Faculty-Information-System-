@@ -1,0 +1,36 @@
+﻿@model FacultyInformation.Models.Publication
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Publication Details</h2>
+
+<div>
+    <h4>Publication</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PublicationTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Faculty.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Faculty.FirstName)
+        </dd>
+        <!-- Add other fields as needed -->
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PublicationID }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.PublicationID })
+</p>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

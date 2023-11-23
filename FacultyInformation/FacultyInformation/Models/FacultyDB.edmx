@@ -1,0 +1,680 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Faculty_InformationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="CourseName" Type="nvarchar(max)" />
+          <Property Name="CourseCredits" Type="int" />
+          <Property Name="DeptID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Faculty_Information.dbo.CoursesTaught' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CoursesTaught">
+          <Property Name="CourseID" Type="int" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="SubjectID" Type="int" />
+          <Property Name="FirstDateTaught" Type="date" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'Faculty_Information.dbo.CourseSubject' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CourseSubject">
+          <Property Name="CourseID" Type="int" />
+          <Property Name="SubjectID" Type="int" />
+        </EntityType>-->
+        <EntityType Name="Degrees">
+          <Key>
+            <PropertyRef Name="DegreeID" />
+          </Key>
+          <Property Name="DegreeID" Type="int" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="Degree" Type="nvarchar(max)" />
+          <Property Name="Specialization" Type="nvarchar(max)" />
+          <Property Name="DegreeYear" Type="int" />
+          <Property Name="Grade" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptID" />
+          </Key>
+          <Property Name="DeptID" Type="int" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="int" Nullable="false" />
+          <Property Name="DesignationName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="State" Type="nvarchar(max)" />
+          <Property Name="Pincode" Type="int" />
+          <Property Name="MobileNo" Type="nvarchar(max)" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="DeptID" Type="int" />
+          <Property Name="DesignationID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Grants">
+          <Key>
+            <PropertyRef Name="GrantID" />
+          </Key>
+          <Property Name="GrantID" Type="int" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="GrantTitle" Type="nvarchar(max)" />
+          <Property Name="GrantDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Publications">
+          <Key>
+            <PropertyRef Name="PublicationID" />
+          </Key>
+          <Property Name="PublicationID" Type="int" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="PublicationTitle" Type="nvarchar(max)" />
+          <Property Name="ArticleName" Type="nvarchar(max)" />
+          <Property Name="PublisherName" Type="nvarchar(max)" />
+          <Property Name="PublicationLocation" Type="nvarchar(max)" />
+          <Property Name="PublishedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Subjects">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="int" Nullable="false" />
+          <Property Name="SubjectName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WorkHistory">
+          <Key>
+            <PropertyRef Name="WorkHistoryID" />
+          </Key>
+          <Property Name="WorkHistoryID" Type="int" Nullable="false" />
+          <Property Name="FacultyID" Type="int" />
+          <Property Name="Organization" Type="nvarchar(max)" />
+          <Property Name="JobTitle" Type="nvarchar(max)" />
+          <Property Name="JobBeginDate" Type="date" />
+          <Property Name="JobEndDate" Type="date" />
+          <Property Name="JobResponsibilities" Type="nvarchar(max)" />
+          <Property Name="JobType" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Courses__DeptID__3A81B327">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'Faculty_Information.dbo.CoursesTaught' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CoursesTa__Cours__412EB0B6" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'Faculty_Information.dbo.CoursesTaught' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CoursesTa__Facul__4222D4EF" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'Faculty_Information.dbo.CoursesTaught' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CoursesTa__Subje__4316F928" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'Faculty_Information.dbo.CourseSubject' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CourseSub__Cours__3E52440B" />-->
+        <!--Errors Found During Generation:
+error 6004: The table 'Faculty_Information.dbo.CourseSubject' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__CourseSub__Subje__3F466844" />-->
+        <Association Name="FK__Degrees__Faculty__34C8D9D1">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Degrees" Type="Self.Degrees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__DeptID__2A4B4B5E">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__Designa__2B3F6F97">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesignationID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__UserID__2C3393D0">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grants__FacultyI__37A5467C">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Grants" Type="Self.Grants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Grants">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Publicati__Facul__2F10007B">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Publications" Type="Self.Publications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Publications">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkHisto__Facul__31EC6D26">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="WorkHistory" Type="Self.WorkHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="WorkHistory">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Faculty_InformationModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degrees" EntityType="Self.Degrees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Designation" EntityType="Self.Designation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grants" EntityType="Self.Grants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publications" EntityType="Self.Publications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkHistory" EntityType="Self.WorkHistory" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Courses__DeptID__3A81B327" Association="Self.FK__Courses__DeptID__3A81B327">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Degrees__Faculty__34C8D9D1" Association="Self.FK__Degrees__Faculty__34C8D9D1">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__DeptID__2A4B4B5E" Association="Self.FK__Faculty__DeptID__2A4B4B5E">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Faculty" EntitySet="Faculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__Designa__2B3F6F97" Association="Self.FK__Faculty__Designa__2B3F6F97">
+            <End Role="Designation" EntitySet="Designation" />
+            <End Role="Faculty" EntitySet="Faculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__UserID__2C3393D0" Association="Self.FK__Faculty__UserID__2C3393D0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Faculty" EntitySet="Faculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grants__FacultyI__37A5467C" Association="Self.FK__Grants__FacultyI__37A5467C">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Grants" EntitySet="Grants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Publicati__Facul__2F10007B" Association="Self.FK__Publicati__Facul__2F10007B">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Publications" EntitySet="Publications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkHisto__Facul__31EC6D26" Association="Self.FK__WorkHisto__Facul__31EC6D26">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="WorkHistory" EntitySet="WorkHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Faculty_InformationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CourseCredits" Type="Int32" />
+          <Property Name="DeptID" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Courses__DeptID__3A81B327" FromRole="Courses" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="DegreeID" />
+          </Key>
+          <Property Name="DegreeID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="Degree1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Specialization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DegreeYear" Type="Int32" />
+          <Property Name="Grade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Degrees__Faculty__34C8D9D1" FromRole="Degrees" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DeptID" />
+          </Key>
+          <Property Name="DeptID" Type="Int32" Nullable="false" />
+          <Property Name="DeptName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Courses__DeptID__3A81B327" FromRole="Department" ToRole="Courses" />
+          <NavigationProperty Name="Faculties" Relationship="Self.FK__Faculty__DeptID__2A4B4B5E" FromRole="Department" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Designation">
+          <Key>
+            <PropertyRef Name="DesignationID" />
+          </Key>
+          <Property Name="DesignationID" Type="Int32" Nullable="false" />
+          <Property Name="DesignationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculties" Relationship="Self.FK__Faculty__Designa__2B3F6F97" FromRole="Designation" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="FacultyID" />
+          </Key>
+          <Property Name="FacultyID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="MobileNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Precision="0" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="DeptID" Type="Int32" />
+          <Property Name="DesignationID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Degrees" Relationship="Self.FK__Degrees__Faculty__34C8D9D1" FromRole="Faculty" ToRole="Degrees" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Faculty__DeptID__2A4B4B5E" FromRole="Faculty" ToRole="Department" />
+          <NavigationProperty Name="Designation" Relationship="Self.FK__Faculty__Designa__2B3F6F97" FromRole="Faculty" ToRole="Designation" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Faculty__UserID__2C3393D0" FromRole="Faculty" ToRole="Users" />
+          <NavigationProperty Name="Grants" Relationship="Self.FK__Grants__FacultyI__37A5467C" FromRole="Faculty" ToRole="Grants" />
+          <NavigationProperty Name="Publications" Relationship="Self.FK__Publicati__Facul__2F10007B" FromRole="Faculty" ToRole="Publications" />
+          <NavigationProperty Name="WorkHistories" Relationship="Self.FK__WorkHisto__Facul__31EC6D26" FromRole="Faculty" ToRole="WorkHistory" />
+        </EntityType>
+        <EntityType Name="Grant">
+          <Key>
+            <PropertyRef Name="GrantID" />
+          </Key>
+          <Property Name="GrantID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="GrantTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GrantDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Grants__FacultyI__37A5467C" FromRole="Grants" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Publication">
+          <Key>
+            <PropertyRef Name="PublicationID" />
+          </Key>
+          <Property Name="PublicationID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="PublicationTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArticleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublisherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublicationLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Publicati__Facul__2F10007B" FromRole="Publications" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectID" />
+          </Key>
+          <Property Name="SubjectID" Type="Int32" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculties" Relationship="Self.FK__Faculty__UserID__2C3393D0" FromRole="Users" ToRole="Faculty" />
+        </EntityType>
+        <EntityType Name="WorkHistory">
+          <Key>
+            <PropertyRef Name="WorkHistoryID" />
+          </Key>
+          <Property Name="WorkHistoryID" Type="Int32" Nullable="false" />
+          <Property Name="FacultyID" Type="Int32" />
+          <Property Name="Organization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobBeginDate" Type="DateTime" Precision="0" />
+          <Property Name="JobEndDate" Type="DateTime" Precision="0" />
+          <Property Name="JobResponsibilities" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JobType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__WorkHisto__Facul__31EC6D26" FromRole="WorkHistory" ToRole="Faculty" />
+        </EntityType>
+        <Association Name="FK__Courses__DeptID__3A81B327">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Degrees__Faculty__34C8D9D1">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Degrees" Type="Self.Degree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__DeptID__2A4B4B5E">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DeptID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__Designa__2B3F6F97">
+          <End Role="Designation" Type="Self.Designation" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Designation">
+              <PropertyRef Name="DesignationID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Faculty__UserID__2C3393D0">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Faculty">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grants__FacultyI__37A5467C">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Grants" Type="Self.Grant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Grants">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Publicati__Facul__2F10007B">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Publications" Type="Self.Publication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="Publications">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkHisto__Facul__31EC6D26">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="WorkHistory" Type="Self.WorkHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="FacultyID" />
+            </Principal>
+            <Dependent Role="WorkHistory">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Faculty_InformationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="Degrees" EntityType="Self.Degree" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Designations" EntityType="Self.Designation" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Grants" EntityType="Self.Grant" />
+          <EntitySet Name="Publications" EntityType="Self.Publication" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WorkHistories" EntityType="Self.WorkHistory" />
+          <AssociationSet Name="FK__Courses__DeptID__3A81B327" Association="Self.FK__Courses__DeptID__3A81B327">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Degrees__Faculty__34C8D9D1" Association="Self.FK__Degrees__Faculty__34C8D9D1">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__DeptID__2A4B4B5E" Association="Self.FK__Faculty__DeptID__2A4B4B5E">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Faculty" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__Designa__2B3F6F97" Association="Self.FK__Faculty__Designa__2B3F6F97">
+            <End Role="Designation" EntitySet="Designations" />
+            <End Role="Faculty" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Faculty__UserID__2C3393D0" Association="Self.FK__Faculty__UserID__2C3393D0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Faculty" EntitySet="Faculties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grants__FacultyI__37A5467C" Association="Self.FK__Grants__FacultyI__37A5467C">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Grants" EntitySet="Grants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Publicati__Facul__2F10007B" Association="Self.FK__Publicati__Facul__2F10007B">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Publications" EntitySet="Publications" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkHisto__Facul__31EC6D26" Association="Self.FK__WorkHisto__Facul__31EC6D26">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="WorkHistory" EntitySet="WorkHistories" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Faculty_InformationModelStoreContainer" CdmEntityContainer="Faculty_InformationEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseCredits" ColumnName="CourseCredits" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degrees">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Degree">
+              <MappingFragment StoreEntitySet="Degrees">
+                <ScalarProperty Name="DegreeID" ColumnName="DegreeID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="Degree1" ColumnName="Degree" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="DegreeYear" ColumnName="DegreeYear" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Designations">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Designation">
+              <MappingFragment StoreEntitySet="Designation">
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="DesignationName" ColumnName="DesignationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grants">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Grant">
+              <MappingFragment StoreEntitySet="Grants">
+                <ScalarProperty Name="GrantID" ColumnName="GrantID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="GrantTitle" ColumnName="GrantTitle" />
+                <ScalarProperty Name="GrantDescription" ColumnName="GrantDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publications">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Publication">
+              <MappingFragment StoreEntitySet="Publications">
+                <ScalarProperty Name="PublicationID" ColumnName="PublicationID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="PublicationTitle" ColumnName="PublicationTitle" />
+                <ScalarProperty Name="ArticleName" ColumnName="ArticleName" />
+                <ScalarProperty Name="PublisherName" ColumnName="PublisherName" />
+                <ScalarProperty Name="PublicationLocation" ColumnName="PublicationLocation" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.Subject">
+              <MappingFragment StoreEntitySet="Subjects">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkHistories">
+            <EntityTypeMapping TypeName="Faculty_InformationModel.WorkHistory">
+              <MappingFragment StoreEntitySet="WorkHistory">
+                <ScalarProperty Name="WorkHistoryID" ColumnName="WorkHistoryID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="JobBeginDate" ColumnName="JobBeginDate" />
+                <ScalarProperty Name="JobEndDate" ColumnName="JobEndDate" />
+                <ScalarProperty Name="JobResponsibilities" ColumnName="JobResponsibilities" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

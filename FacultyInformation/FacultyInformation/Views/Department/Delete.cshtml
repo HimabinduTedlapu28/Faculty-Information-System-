@@ -1,0 +1,30 @@
+﻿@model FacultyInformation.Models.Department
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Department</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DeptName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DeptName)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Department", new { id = Model.DeptID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </p>
+    }
+</div>

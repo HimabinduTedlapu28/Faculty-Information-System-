@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e939152ce48549758292320e5c1b044b" Name="Diagram1">
+        <EntityTypeShape EntityType="Faculty_InformationModel.Cours" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Degree" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Department" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Designation" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Faculty" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Grant" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Publication" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.Subject" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.User" Width="1.5" PointX="3.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Faculty_InformationModel.WorkHistory" Width="1.5" PointX="8.25" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Courses__DeptID__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Degrees__Faculty__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Faculty__DeptID__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Faculty__Designa__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Faculty__UserID__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Grants__FacultyI__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__Publicati__Facul__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Faculty_InformationModel.FK__WorkHisto__Facul__31EC6D26" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
